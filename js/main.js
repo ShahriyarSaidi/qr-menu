@@ -99,3 +99,43 @@ document.addEventListener("DOMContentLoaded", function () {
   // Page load-da da aktiv et
   setActiveLink();
 });
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+  const images = document.querySelectorAll(".lazy-image");
+
+  const imageObserver = new IntersectionObserver(
+    (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+
+          // Şəkil artıq cache-dədirsə
+          if (img.complete) {
+            img.classList.add("loaded");
+          } else {
+            img.addEventListener(
+              "load",
+              () => {
+                img.classList.add("loaded");
+              },
+              { once: true }
+            );
+          }
+
+          observer.unobserve(img);
+        }
+      });
+    },
+    {
+      rootMargin: "100px 0px", // Scroll etməzdən biraz əvvəl yüklə
+      threshold: 1,
+    }
+  );
+
+  images.forEach((img) => {
+    imageObserver.observe(img);
+  });
+});

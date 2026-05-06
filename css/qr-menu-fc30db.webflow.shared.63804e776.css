@@ -2613,6 +2613,11 @@ body {
   font-size: 18px;
   font-weight: 600;
   line-height: 24px;
+  display: -webkit-box;
+  -webkit-line-clamp: 1; /* Maksimum 3 sətir */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .menu-paragraph {
@@ -2628,6 +2633,11 @@ body {
   font-size: 13px;
   line-height: 18px;
   overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Maksimum 3 sətir */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .image-wrapper {
@@ -2861,7 +2871,7 @@ body {
   }
 
   .menu-paragraph {
-    max-height: 48px;
+   
     font-size: 12px;
     line-height: 16px;
   }
@@ -2870,4 +2880,19 @@ body {
     grid-column-gap: 40px;
     grid-row-gap: 40px;
   }
+}
+
+/* Başlanğıc blur + fade */
+.lazy-image {
+  opacity: 0;
+  transform: translateY(20px) scale(0.98);
+  filter: blur(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+}
+
+/* Yüklənəndə premium görünüş */
+.lazy-image.loaded {
+  opacity: 1;
+  transform: translateY(0) scale(2);
+  filter: blur(0);
 }
