@@ -104,38 +104,48 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const images = document.querySelectorAll(".lazy-image");
+  const cards = document.querySelectorAll(".div-block-11");
 
-  const imageObserver = new IntersectionObserver(
-    (entries, observer) => {
+  const observer = new IntersectionObserver(
+    (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
+        if (!entry.isIntersecting) return;
 
-          // Şəkil artıq cache-dədirsə
-          if (img.complete) {
-            img.classList.add("loaded");
-          } else {
-            img.addEventListener(
-              "load",
-              () => {
-                img.classList.add("loaded");
-              },
-              { once: true }
-            );
+        const card = entry.target;
+        const img = card.querySelector(".lazy-image");
+
+        // Dalğa effekti üçün sıra
+        const siblings = [...card.parentElement.children];
+        const index = siblings.indexOf(card);
+
+        setTimeout(() => {
+          card.classList.add("in-view");
+
+          if (img) {
+            if (img.complete) {
+              img.classList.add("loaded");
+              img.closest(".menu-image-wrapper")?.classList.add("loaded");
+            } else {
+              img.addEventListener(
+                "load",
+                () => {
+                  img.classList.add("loaded");
+                  img.closest(".menu-image-wrapper")?.classList.add("loaded");
+                },
+                { once: true }
+              );
+            }
           }
+        }, index * 140);
 
-          observer.unobserve(img);
-        }
+        observer.unobserve(card);
       });
     },
     {
-      rootMargin: "100px 0px", // Scroll etməzdən biraz əvvəl yüklə
-      threshold: 1,
+      threshold: 0.18,
+      rootMargin: "0px 0px -8% 0px",
     }
   );
 
-  images.forEach((img) => {
-    imageObserver.observe(img);
-  });
+  cards.forEach((card) => observer.observe(card));
 });

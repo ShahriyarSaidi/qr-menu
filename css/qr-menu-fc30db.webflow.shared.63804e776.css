@@ -2883,16 +2883,59 @@ body {
 }
 
 /* Başlanğıc blur + fade */
-.lazy-image {
+/* CARD */
+.div-block-11 {
   opacity: 0;
-  transform: translateY(20px) scale(0.98);
-  filter: blur(8px);
-  transition: opacity 0.8s ease, transform 0.8s ease, filter 0.8s ease;
+  transform: translateY(60px);
+  transition:
+    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* Yüklənəndə premium görünüş */
-.lazy-image.loaded {
+/* Kart görünəndə */
+.div-block-11.in-view {
   opacity: 1;
-  transform: translateY(0) scale(2);
+  transform: translateY(0);
+}
+
+/* Image wrapper */
+.menu-image-wrapper {
+  position: relative;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+/* Image */
+.lazy-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transform: scale(1.25);
+  filter: blur(12px);
+  transition:
+    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 1.2s ease;
+}
+
+/* Reveal olanda */
+.lazy-image.loaded {
+  transform: scale(1);
   filter: blur(0);
+}
+
+/* Premium curtain */
+.menu-image-wrapper::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #121212; /* öz bg rənginə uyğunlaşdır */
+  transform: translateY(0%);
+  transition: transform 1.3s cubic-bezier(0.77, 0, 0.18, 1);
+  z-index: 3;
+}
+
+/* Curtain açılır */
+.menu-image-wrapper.loaded::after {
+  transform: translateY(-105%);
 }
