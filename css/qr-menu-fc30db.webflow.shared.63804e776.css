@@ -2882,6 +2882,10 @@ body {
   }
 }
 
+
+
+
+
 /* Başlanğıc blur + fade */
 /* Wavzai-style: yalnız şəkil, cinematic zoom-out */
 .menu-image-wrapper {
@@ -2953,3 +2957,9 @@ body {
 .menu-image-wrapper.loaded::after {
   opacity: 0;
 }
+
+
+
+
+
+
