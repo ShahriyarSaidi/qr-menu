@@ -104,48 +104,41 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-  const cards = document.querySelectorAll(".div-block-11");
+  const imageWrappers = document.querySelectorAll(".menu-image-wrapper");
 
   const observer = new IntersectionObserver(
-    (entries) => {
+    (entries, obs) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
 
-        const card = entry.target;
-        const img = card.querySelector(".lazy-image");
+        const wrapper = entry.target;
+        const img = wrapper.querySelector("img");
 
-        // Dalğa effekti üçün sıra
-        const siblings = [...card.parentElement.children];
-        const index = siblings.indexOf(card);
+        // Şəkil görünəndə Wavzai-style reveal
+        const reveal = () => {
+          wrapper.classList.add("loaded");
+        };
 
-        setTimeout(() => {
-          card.classList.add("in-view");
-
-          if (img) {
-            if (img.complete) {
-              img.classList.add("loaded");
-              img.closest(".menu-image-wrapper")?.classList.add("loaded");
-            } else {
-              img.addEventListener(
-                "load",
-                () => {
-                  img.classList.add("loaded");
-                  img.closest(".menu-image-wrapper")?.classList.add("loaded");
-                },
-                { once: true }
-              );
-            }
+        if (img) {
+          if (img.complete) {
+            reveal();
+          } else {
+            img.addEventListener("load", reveal, { once: true });
           }
-        }, index * 140);
+        } else {
+          reveal();
+        }
 
-        observer.unobserve(card);
+        obs.unobserve(wrapper);
       });
     },
     {
-      threshold: 0.18,
+      threshold: 0.15,
       rootMargin: "0px 0px -8% 0px",
     }
   );
 
-  cards.forEach((card) => observer.observe(card));
+  imageWrappers.forEach((wrapper) => {
+    observer.observe(wrapper);
+  });
 });

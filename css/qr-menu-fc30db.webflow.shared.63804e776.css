@@ -2883,59 +2883,73 @@ body {
 }
 
 /* Başlanğıc blur + fade */
-/* CARD */
-.div-block-11 {
-  opacity: 0;
-  transform: translateY(60px);
-  transition:
-    opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Kart görünəndə */
-.div-block-11.in-view {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Image wrapper */
+/* Wavzai-style: yalnız şəkil, cinematic zoom-out */
 .menu-image-wrapper {
   position: relative;
   overflow: hidden;
   border-radius: inherit;
+  background: #121212; /* sayt background */
 }
 
-/* Image */
-.lazy-image {
+/* Şəkil başlanğıcda çox yaxın */
+.menu-image-wrapper img,
+.menu-image-wrapper .lazy-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
 
-  transform: scale(1.25);
-  filter: blur(12px);
+  /* Əsas effekt */
+  transform: scale(1.8);
+  filter: blur(20px);
+
   transition:
-    transform 1.4s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 1.2s ease;
+    transform 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 1.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+  will-change: transform, filter;
 }
 
-/* Reveal olanda */
-.lazy-image.loaded {
+/* Reveal olanda normal ölçüyə qayıdır */
+.menu-image-wrapper.loaded img,
+.menu-image-wrapper.loaded .lazy-image {
   transform: scale(1);
   filter: blur(0);
 }
 
-/* Premium curtain */
+/* Topdan aşağı mask */
+.menu-image-wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: inherit;
+  z-index: 3;
+
+  transform: translateY(0%);
+  transition: transform 1.6s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+/* Açılır */
+.menu-image-wrapper.loaded::before {
+  transform: translateY(-100%);
+}
+
+/* Daha real hiss üçün slight dark fade */
 .menu-image-wrapper::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: #121212; /* öz bg rənginə uyğunlaşdır */
-  transform: translateY(0%);
-  transition: transform 1.3s cubic-bezier(0.77, 0, 0.18, 1);
-  z-index: 3;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0.18),
+    rgba(0,0,0,0)
+  );
+
+  opacity: 1;
+  transition: opacity 1.4s ease;
+  z-index: 2;
+  pointer-events: none;
 }
 
-/* Curtain açılır */
 .menu-image-wrapper.loaded::after {
-  transform: translateY(-105%);
+  opacity: 0;
 }
