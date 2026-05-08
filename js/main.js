@@ -143,7 +143,20 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+function copyPassword() {
+  const text = document.getElementById("passwordText").innerText;
 
+  // "Şifrə: 123456789" → yalnız rəqəmi götürmək istəyiriksə:
+  const password = text.replace("Şifrə: ", "");
+
+  navigator.clipboard.writeText(password)
+    .then(() => {
+      alert("Şifrə kopyalandı: " + password);
+    })
+    .catch(err => {
+      console.log("Kopyalama xətası:", err);
+    });
+}
 
 
 
