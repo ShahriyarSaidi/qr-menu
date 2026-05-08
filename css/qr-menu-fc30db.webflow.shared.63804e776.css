@@ -2907,7 +2907,7 @@ body {
   filter: blur(20px);
 
   transition:
-    transform 2.2s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 5.2s cubic-bezier(0.16, 1, 0.3, 1),
     filter 1.8s cubic-bezier(0.16, 1, 0.3, 1);
 
   will-change: transform, filter;
