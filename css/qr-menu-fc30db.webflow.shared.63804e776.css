@@ -2996,7 +2996,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
 
   padding: 16px 28px;
   min-width: 260px;
@@ -3006,7 +3006,6 @@ body {
     linear-gradient(
       135deg,
       #121212 0%,
-      #121212 32%,
       #121212 100%
     ),
     rgba(10, 10, 12, 0.327);
@@ -3041,141 +3040,40 @@ body {
     visibility 0.8s;
 }
 
-/* Outer ambient glow */
+/* TEXT */
+.copy-toast span {
+  position: relative;
+}
+
+/* ICON (SOLDA CHECK) */
 .copy-toast::before {
   content: "";
-  width: 10px;
-  height: 10px;
+  width: 18px;
+  height: 18px;
   flex-shrink: 0;
-  border-radius: 50%;
 
-  background:
-    radial-gradient(circle at center,
-      rgba(255,255,255,1) 0%,
-      rgba(255,255,255,0.92) 28%,
-      rgba(255,255,255,0.35) 58%,
-      transparent 78%
-    );
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='white' viewBox='0 0 256 256'%3E%3Cpath d='M229.66,77.66l-128,128a8,8,0,0,1-11.32,0l-56-56a8,8,0,0,1,11.32-11.32L96,188.69,218.34,66.34a8,8,0,0,1,11.32,11.32Z'/%3E%3C/svg%3E");
 
-  box-shadow:
-    0 0 14px rgba(255,255,255,0.95),
-    0 0 34px rgba(255,255,255,0.32),
-    0 0 58px rgba(255,255,255,0.14);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 
-  animation: toastOrb 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  opacity: 0.95;
+
+  filter: drop-shadow(0 0 8px rgba(255,255,255,0.25));
 }
 
-/* Luxury moving crystal reflection */
-.copy-toast::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-
-  background:
-    linear-gradient(
-      115deg,
-      transparent 18%,
-      rgba(255,255,255,0.02) 28%,
-      rgba(255,255,255,0.16) 48%,
-      rgba(255,255,255,0.03) 62%,
-      transparent 78%
-    );
-
-  transform: translateX(-160%) skewX(-24deg);
-  pointer-events: none;
-}
-
-/* Inner gloss layer */
-.copy-toast span {
-  position: absolute;
-  inset: 1px;
-  border-radius: inherit;
-  background: linear-gradient(
-    180deg,
-    #121212,
-    transparent 30%,
-    transparent 70%,
-    #121212
-  );
-  pointer-events: none;
-}
-
-/* Show */
+/* SHOW */
 .copy-toast.show {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0) scale(1);
 }
 
-/* Shine sweep */
-.copy-toast.show::after {
-  animation: crystalSweep 2.4s cubic-bezier(0.19, 1, 0.22, 1);
-}
-
-/* Hide */
+/* HIDE */
 .copy-toast.hide {
   opacity: 0;
   transform: translateX(-50%) translateY(34px) scale(0.965);
-}
-
-/* Hover luxury lift */
-.copy-toast:hover {
-  transform: translateX(-50%) translateY(-3px) scale(1.02);
-  box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.48),
-    0 10px 30px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255,255,255,0.16);
-}
-
-/* Animations */
-@keyframes crystalSweep {
-  0% {
-    transform: translateX(-160%) skewX(-24deg);
-  }
-  100% {
-    transform: translateX(220%) skewX(-24deg);
-  }
-}
-
-@keyframes toastOrb {
-  0%, 100% {
-    transform: scale(1);
-    opacity: 0.92;
-  }
-  50% {
-    transform: scale(1.55);
-    opacity: 1;
-  }
-}
-
-/* Mobile ultra polish */
-@media (max-width: 480px) {
-  .copy-toast {
-    min-width: 260px;
-    padding: 14px 18px;
-    font-size: 13px;
-    bottom: 72px;
-    border-radius: 18px;
-  }
-
-  .copy-toast:hover {
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-}
-
-/* Dark mode enhancement */
-@media (prefers-color-scheme: dark) {
-  .copy-toast {
-    background:
-      linear-gradient(
-        135deg,
-        rgba(255,255,255,0.13),
-        rgba(255,255,255,0.04),
-        rgba(255,255,255,0.015)
-      ),
-      rgba(8, 8, 10, 0.82);
-  }
 }
 
 
