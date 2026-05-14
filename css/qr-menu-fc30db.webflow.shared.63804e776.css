@@ -2978,28 +2978,148 @@ body {
   opacity: 0;
 }
 
+
+
+
+
+
+
+
+
+
 .copy-toast {
   position: fixed;
-  bottom: 30px;
   left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  background: #111;
-  color: white;
-  padding: 12px 22px;
-  border-radius: 12px;
+  bottom: 32px;
+  transform: translateX(-50%) translateY(80px) scale(0.94);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  padding: 15px 26px;
+  min-width: 250px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.10),
+      rgba(255, 255, 255, 0.03)
+    ),
+    rgba(8, 8, 8, 0.68);
+
+  backdrop-filter: blur(30px) saturate(180%);
+  -webkit-backdrop-filter: blur(30px) saturate(180%);
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 999px;
+
+  color: rgba(255, 255, 255, 0.96);
   font-size: 14px;
   font-weight: 500;
+  letter-spacing: 0.3px;
+
+  box-shadow:
+    0 18px 55px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+
   opacity: 0;
   visibility: hidden;
-  transition: all 0.3s ease;
+  overflow: hidden;
   z-index: 9999;
+
+  transition:
+    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.75s ease,
+    visibility 0.75s;
 }
 
+/* Ultra premium glow dot */
+.copy-toast::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+
+  background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.85) 35%, transparent 75%);
+
+  box-shadow:
+    0 0 10px rgba(255,255,255,0.95),
+    0 0 22px rgba(255,255,255,0.35),
+    0 0 38px rgba(255,255,255,0.12);
+
+  animation: toastPulse 2.8s ease-in-out infinite;
+  flex-shrink: 0;
+}
+
+/* Elegant glass reflection */
+.copy-toast::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -180%;
+  width: 55%;
+  height: 100%;
+
+  background: linear-gradient(
+    110deg,
+    transparent,
+    rgba(255, 255, 255, 0.18),
+    transparent
+  );
+
+  transform: skewX(-22deg);
+}
+
+/* Visible state */
 .copy-toast.show {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%) translateY(0) scale(1);
 }
+
+/* Reflection sweep only when shown */
+.copy-toast.show::after {
+  animation: premiumShine 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* Exit state */
+.copy-toast.hide {
+  opacity: 0;
+  transform: translateX(-50%) translateY(30px) scale(0.96);
+}
+
+/* Animations */
+@keyframes premiumShine {
+  0% {
+    left: -180%;
+  }
+  100% {
+    left: 220%;
+  }
+}
+
+@keyframes toastPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.4);
+    opacity: 1;
+  }
+}
+
+/* Hoverdə azca canlılıq */
+.copy-toast:hover {
+  transform: translateX(-50%) translateY(-2px) scale(1.015);
+}
+
+
+
+
 
 .password-copy-icon {
   cursor: pointer;
