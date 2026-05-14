@@ -143,22 +143,33 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-function copyPassword() {
-  const text = document.getElementById("passwordText").innerText;
 
-  // "Şifrə: 123456789" → yalnız rəqəmi götürmək istəyiriksə:
-  const password = text.replace("Şifrə: ", "");
+document.addEventListener("DOMContentLoaded", function () {
+  const copyButton = document.querySelector(".password-copy-icon");
+  const passwordDiv = document.querySelector(".password");
+  const toast = document.querySelector(".copy-toast");
 
-  navigator.clipboard.writeText(password)
-    .then(() => {
-      alert("Şifrə kopyalandı: " + password);
-    })
-    .catch(err => {
-      console.log("Kopyalama xətası:", err);
+  if (copyButton && passwordDiv) {
+    copyButton.addEventListener("click", async function () {
+      const fullText = passwordDiv.textContent.trim();
+      const password = fullText.replace("Sifre:", "").trim();
+
+      try {
+        await navigator.clipboard.writeText(password);
+
+        // Toast göstər
+        toast.classList.add("show");
+
+        setTimeout(() => {
+          toast.classList.remove("show");
+        }, 2000);
+
+      } catch (err) {
+        console.error("Kopyalama alınmadı:", err);
+      }
     });
-}
-
-
+  }
+});
 
 
 
