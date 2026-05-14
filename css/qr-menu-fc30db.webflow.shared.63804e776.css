@@ -2990,131 +2990,192 @@ body {
 .copy-toast {
   position: fixed;
   left: 50%;
-  bottom: 32px;
-  transform: translateX(-50%) translateY(80px) scale(0.94);
+  bottom: 72px;
+  transform: translateX(-50%) translateY(90px) scale(0.92);
 
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 14px;
 
-  padding: 15px 26px;
-  min-width: 250px;
+  padding: 16px 28px;
+  min-width: 260px;
+  max-width: calc(100% - 24px);
 
   background:
     linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.10),
-      rgba(255, 255, 255, 0.03)
+      #121212 0%,
+      #121212 32%,
+      #121212 100%
     ),
-    rgba(8, 8, 8, 0.68);
+    rgba(10, 10, 12, 0.327);
 
-  backdrop-filter: blur(30px) saturate(180%);
-  -webkit-backdrop-filter: blur(30px) saturate(180%);
+  backdrop-filter: blur(32px) saturate(220%);
+  -webkit-backdrop-filter: blur(32px) saturate(220%);
 
-  border: 1px solid rgba(255, 255, 255, 0.10);
   border-radius: 999px;
+  border: 1px solid #232323;
 
-  color: rgba(255, 255, 255, 0.96);
+  color: rgba(255, 255, 255, 0.98);
   font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.3px;
+  font-weight: 400;
+  letter-spacing: 0.35px;
+  text-align: center;
 
   box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.34),
-    inset 0 1px 0 rgba(255, 255, 255, 0.10),
+    0 24px 70px rgba(0, 0, 0, 0.32),
+    0 8px 24px rgba(0, 0, 0, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.14),
     inset 0 -1px 0 rgba(255, 255, 255, 0.03);
 
   opacity: 0;
   visibility: hidden;
   overflow: hidden;
+  isolation: isolate;
   z-index: 9999;
 
   transition:
-    transform 0.95s cubic-bezier(0.16, 1, 0.3, 1),
-    opacity 0.75s ease,
-    visibility 0.75s;
+    transform 1.05s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.8s ease,
+    visibility 0.8s;
 }
 
-/* Ultra premium glow dot */
+/* Outer ambient glow */
 .copy-toast::before {
   content: "";
-  width: 9px;
-  height: 9px;
+  width: 10px;
+  height: 10px;
+  flex-shrink: 0;
   border-radius: 50%;
 
-  background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.85) 35%, transparent 75%);
+  background:
+    radial-gradient(circle at center,
+      rgba(255,255,255,1) 0%,
+      rgba(255,255,255,0.92) 28%,
+      rgba(255,255,255,0.35) 58%,
+      transparent 78%
+    );
 
   box-shadow:
-    0 0 10px rgba(255,255,255,0.95),
-    0 0 22px rgba(255,255,255,0.35),
-    0 0 38px rgba(255,255,255,0.12);
+    0 0 14px rgba(255,255,255,0.95),
+    0 0 34px rgba(255,255,255,0.32),
+    0 0 58px rgba(255,255,255,0.14);
 
-  animation: toastPulse 2.8s ease-in-out infinite;
-  flex-shrink: 0;
+  animation: toastOrb 3.4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 
-/* Elegant glass reflection */
+/* Luxury moving crystal reflection */
 .copy-toast::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: -180%;
-  width: 55%;
-  height: 100%;
+  inset: 0;
+  border-radius: inherit;
 
-  background: linear-gradient(
-    110deg,
-    transparent,
-    rgba(255, 255, 255, 0.18),
-    transparent
-  );
+  background:
+    linear-gradient(
+      115deg,
+      transparent 18%,
+      rgba(255,255,255,0.02) 28%,
+      rgba(255,255,255,0.16) 48%,
+      rgba(255,255,255,0.03) 62%,
+      transparent 78%
+    );
 
-  transform: skewX(-22deg);
+  transform: translateX(-160%) skewX(-24deg);
+  pointer-events: none;
 }
 
-/* Visible state */
+/* Inner gloss layer */
+.copy-toast span {
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    #121212,
+    transparent 30%,
+    transparent 70%,
+    #121212
+  );
+  pointer-events: none;
+}
+
+/* Show */
 .copy-toast.show {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0) scale(1);
 }
 
-/* Reflection sweep only when shown */
+/* Shine sweep */
 .copy-toast.show::after {
-  animation: premiumShine 1.8s cubic-bezier(0.19, 1, 0.22, 1);
+  animation: crystalSweep 2.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* Exit state */
+/* Hide */
 .copy-toast.hide {
   opacity: 0;
-  transform: translateX(-50%) translateY(30px) scale(0.96);
+  transform: translateX(-50%) translateY(34px) scale(0.965);
+}
+
+/* Hover luxury lift */
+.copy-toast:hover {
+  transform: translateX(-50%) translateY(-3px) scale(1.02);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.48),
+    0 10px 30px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255,255,255,0.16);
 }
 
 /* Animations */
-@keyframes premiumShine {
+@keyframes crystalSweep {
   0% {
-    left: -180%;
+    transform: translateX(-160%) skewX(-24deg);
   }
   100% {
-    left: 220%;
+    transform: translateX(220%) skewX(-24deg);
   }
 }
 
-@keyframes toastPulse {
+@keyframes toastOrb {
   0%, 100% {
     transform: scale(1);
     opacity: 0.92;
   }
   50% {
-    transform: scale(1.4);
+    transform: scale(1.55);
     opacity: 1;
   }
 }
 
-/* Hoverdə azca canlılıq */
-.copy-toast:hover {
-  transform: translateX(-50%) translateY(-2px) scale(1.015);
+/* Mobile ultra polish */
+@media (max-width: 480px) {
+  .copy-toast {
+    min-width: 260px;
+    padding: 14px 18px;
+    font-size: 13px;
+    bottom: 72px;
+    border-radius: 18px;
+  }
+
+  .copy-toast:hover {
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+/* Dark mode enhancement */
+@media (prefers-color-scheme: dark) {
+  .copy-toast {
+    background:
+      linear-gradient(
+        135deg,
+        rgba(255,255,255,0.13),
+        rgba(255,255,255,0.04),
+        rgba(255,255,255,0.015)
+      ),
+      rgba(8, 8, 10, 0.82);
+  }
 }
 
 
