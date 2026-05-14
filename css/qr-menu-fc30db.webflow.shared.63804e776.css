@@ -2216,7 +2216,7 @@ body {
 .information-box-inside {
   grid-column-gap: 8px;
   grid-row-gap: 8px;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   display: flex;
 }
@@ -2572,7 +2572,16 @@ body {
   overflow: hidden;
 }
 
-.div-block-110 {
+.div-block-11 {
+  border: 1px solid #222;
+  flex-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+
+.melumat {
   flex: 1;
   justify-content: space-between;
   align-items: center;
@@ -2587,17 +2596,6 @@ body {
 
 .password {
   justify-content: center;
-  align-items: center;
-  display: flex;
-}
-
-
-.password-copy-icon {
-  grid-column-gap: 16px;
-  grid-row-gap: 16px;
-  flex: 0 auto;
-  order: 0;
-  justify-content: space-between;
   align-items: center;
   display: flex;
 }
@@ -2980,7 +2978,6 @@ body {
   opacity: 0;
 }
 
-
 .copy-toast {
   position: fixed;
   bottom: 30px;
@@ -3003,6 +3000,12 @@ body {
   visibility: visible;
   transform: translateX(-50%) translateY(0);
 }
+
+.password-copy-icon {
+  cursor: pointer;
+  
+}
+
 
 
 
