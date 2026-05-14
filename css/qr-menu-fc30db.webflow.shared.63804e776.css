@@ -2998,8 +2998,8 @@ body {
   justify-content: center;
   gap: 12px;
 
-  padding: 16px 28px;
-  min-width: 260px;
+  padding: 10px 20px;
+  min-width: 180px;
   max-width: calc(100% - 24px);
 
   background:
@@ -3013,11 +3013,11 @@ body {
   backdrop-filter: blur(32px) saturate(220%);
   -webkit-backdrop-filter: blur(32px) saturate(220%);
 
-  border-radius: 999px;
+  border-radius: 8px;
   border: 1px solid #232323;
 
   color: rgba(255, 255, 255, 0.98);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 400;
   letter-spacing: 0.35px;
   text-align: center;
