@@ -2572,7 +2572,7 @@ body {
   overflow: hidden;
 }
 
-.div-block-11 {
+.div-block-110 {
   flex: 1;
   justify-content: space-between;
   align-items: center;
@@ -2584,7 +2584,6 @@ body {
   grid-row-gap: 16px;
   display: flex;
 }
-
 
 .password {
   justify-content: center;
